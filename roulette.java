@@ -7,7 +7,7 @@ public class roulette
 
     public roulette()
     {
-        startGame();
+        
     }
 
     public void startGame(){

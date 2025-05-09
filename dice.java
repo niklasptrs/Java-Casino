@@ -9,6 +9,9 @@ public class dice {
     int betwert;
     int dice;
 
+    public dice(){
+        
+    }
 
     public void startGame(){
         System.out.println("»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»");
