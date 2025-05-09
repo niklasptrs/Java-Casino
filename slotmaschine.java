@@ -82,6 +82,21 @@ if(abfrage >=2){}
 if(abfrage == 1){
 startGame();
 }
+if (slot1 == slot2 && slot2 == slot3 && slot3 == slot4 && slot4 == slot5) {
+
+
+    schreiben("Jackpot! +" + einsatz * 15 + " €");
+
+
+    guthaben += einsatz * 15;
+
+
+}
+if(slot1 == slot2 && slot2 == slot3){
+
+
+}
+
 }
 
 
