@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-public slotmaschine{
+public class slotmaschine{
 
 int speed = 30;
 int guthaben = 100;
@@ -18,7 +18,7 @@ Symbole[6] = "7";
 
 }
 
-public class slotmaschine(){
+public  slotmaschine(){
 
     startGame();
 }
