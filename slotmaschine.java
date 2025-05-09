@@ -4,19 +4,8 @@ public class slotmaschine{
 
 int speed = 30;
 int guthaben = 100;
-String  [] Symbole = {
 
-    Symbole[0] = "0"";
-Symbole[1] = "&";
-Symbole[2] = "€";
-Symbole[3] = "§";
-Symbole[4] = "$";
-Symbole[5] = "#";
-Symbole[6] = "7";
-
-
-
-}
+String[] Symbole = {"0", "&", "€", "§", "$", "#", "7"};
 
 public  slotmaschine(){
 
