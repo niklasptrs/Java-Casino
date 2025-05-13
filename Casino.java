@@ -5,12 +5,14 @@ public class Casino{
     dice dice1;
     slotmaschine slotmaschine1;
     CrashGame crash1;
+    Guthaben guthaben1;
 
     public Casino(){
         roulette1 = new roulette();
         dice1 = new dice();
         slotmaschine1 = new slotmaschine();
         crash1 = new CrashGame();
+        guthaben1 = new Guthaben();
         
         boolean valid = false;
         while(!valid){
