@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Crash-Game{
 int Guthaben = 100;
 int Geld
+boolean weiter;
 public Crash-Game(){
 
 
@@ -86,9 +87,13 @@ private void weiter(){
         Scanner abfr = new Scanner(System.in);
         int abfrage = abfr.nextInt();
 
-        if(abfrage >=2){}
+        if(abfrage >=2){
+Verdopplungen = 10;
+}
         if(abfrage == 1){
-            startGame();
+            startGameNeu();
+
+
         }
     }
 
@@ -103,6 +108,64 @@ int abfrage = abfr.nextInt();
 Random random = new Random();
 boolean erfolg = random.nextBoolean();
 
+
+
+if(abfrage == 1 && erfolg){
+Geld = 2*Einsatz;
+System.out.println("Glückwunsch Sie haben Ihren Einsatz verdoppelt! Es sind nun "+Geld+" € im Spiel");
+Verdopplungen += 1;
+verdoppeln();
+
 }
+
+else if(abfrage == 1 && !erfolg){
+
+System.out.println("Leider verloren - "+Geld+" €");
+Verdopplungen = 0;
+weiter();
+
+}
+else if(abfrage >= 2){
+Guthaben += Geld;
+Verdopplungen = 0;
+weiter = false;
+weiter();
+}
+
+}
+
+
+
+int Verdopplungen;
+
+private void startGameNeu(){
+weiter = true;
+Verdopplungen = 0;
+while(Verdopplungen <= 5 && weiter){
+
+einsatzAbfr();
+
+
+}
+private void einsatzAbfr(){
+System.out.println("Wieviel möchten Sie setzen?");
+  Scanner abfr = new Scanner(System.in);
+  int Einsatz = abfr.nextInt();
+
+if(Einsatz > Guthaben){
+
+System.out.println("Sie haben einen ungültigen Wert eingegeben, versuchen Sie erneut")
+startGameNeu();
+}
+else if(Einsatz <= Guthaben){
+Guthaben -= Einsatz;
+System.out.println("Einsatz: "+Einsatz+" €");
+verdoppeln();
+
+}
+
+
+}
+
 
 }
