@@ -28,25 +28,25 @@ public class slotmaschine{
             int slot4 = ThreadLocalRandom.current().nextInt(1, 6 + 1);
             int slot5 = ThreadLocalRandom.current().nextInt(1, 6 + 1);
 
-            speed = 100;
+            speed = 1000;
             schreiben(Symbole[slot1]);
             speed = 1;
             schreiben("=====");
-            speed = 100;
+            speed = 1000;
             schreiben(Symbole[slot2]);
             speed = 1;
             schreiben("=====");
-            speed = 100;
+            speed = 1000;
             schreiben(Symbole[slot3]);
             speed = 1;
             schreiben("=====");
-            speed = 100;
+            speed = 1000;
             schreiben(Symbole[slot4]);
             speed = 1;
             schreiben("=====");
-            speed = 100;
+            speed = 1000;
             schreiben(Symbole[slot5]);
-            speed = 30;
+            speed = 1;
 
             if(slot1 != slot2 && slot2 != slot3 && slot3 != slot4 && slot4 != slot5){
                 System.out.println("");
@@ -57,7 +57,7 @@ public class slotmaschine{
             }
 
             if (slot1 == slot2 && slot2 == slot3 && slot3 == slot4 && slot4 == slot5) {
-
+                System.out.println("");
                 schreiben("Jackpot! +" + einsatz * 15 + " €");
 
                 guthaben += einsatz * 15;
@@ -66,7 +66,7 @@ public class slotmaschine{
             }
             //Wenn 345 richtig ist
             if(slot3 == slot4 && slot4 == slot5){
-
+                System.out.println("");
                 schreiben("WIN!!!");
                 System.out.println("");
                 schreiben("+ "+einsatz * 10+" €");
@@ -79,7 +79,7 @@ public class slotmaschine{
 
             //Wenn die 234 richtig ist
             if(slot2 == slot3 && slot3 == slot4){
-
+                System.out.println("");
                 schreiben("WIN!!!");
                 System.out.println("");
                 schreiben("+ "+einsatz * 10+" €");
@@ -91,7 +91,7 @@ public class slotmaschine{
 
             // Wenn die ersten drei richtig sind
             if(slot1 == slot2 && slot2 == slot3){
-
+                System.out.println("");
                 schreiben("WIN!!!");
                 System.out.println("");
                 schreiben("+ "+einsatz * 10+" €");
@@ -100,6 +100,7 @@ public class slotmaschine{
 
                 weiter();
             }
+            
 
 
         }
@@ -129,7 +130,9 @@ public class slotmaschine{
         Scanner abfr = new Scanner(System.in);
         int abfrage = abfr.nextInt();
 
-        if(abfrage >=2){}
+        if(abfrage >=2){
+            System.out.println("");
+        }
         if(abfrage == 1){
             startGame();
         }
