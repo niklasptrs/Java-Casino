@@ -147,24 +147,28 @@ einsatzAbfr();
 
 
 }
-private void einsatzAbfr(){
-System.out.println("Wieviel möchten Sie setzen?");
-  Scanner abfr = new Scanner(System.in);
-  int Einsatz = abfr.nextInt();
+private void einsatzAbfr() {
+    Scanner abfr = new Scanner(System.in);
+    int Einsatz = 0;
+    boolean gültigeEingabe = false;
 
-if(Einsatz > Guthaben){
-
-System.out.println("Sie haben einen ungültigen Wert eingegeben, versuchen Sie erneut")
-startGameNeu();
-}
-else if(Einsatz <= Guthaben){
-Guthaben -= Einsatz;
-System.out.println("Einsatz: "+Einsatz+" €");
-verdoppeln();
-
-}
-
-
+    while (!gültigeEingabe) {
+        System.out.println("Wieviel möchten Sie setzen?");
+        try {
+            Einsatz = abfr.nextInt();
+            if (Einsatz > Guthaben) {
+                System.out.println("Ungültige Eingabe, versuchen Sie erneut.");
+            } else {
+                gültigeEingabe = true;
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Bitte geben Sie eine Zahl ein.");
+            abfr.next(); // Scanner-Fehler zurücksetzen
+        }
+    }
+    Guthaben -= Einsatz;
+    System.out.println("Einsatz: " + Einsatz + " €");
+    verdoppeln();
 }
 
 
