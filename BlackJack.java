@@ -2,10 +2,12 @@
 import java.util.Scanner;
 public class BlackJack
 {
-   
+   Guthaben guthaben1;
+   int guthaben;
     public BlackJack()
     {
-       
+       guthaben1 = new Guthaben();
+       guthaben = guthaben1.getGuthaben();
     }
 
     public void startGame(){
