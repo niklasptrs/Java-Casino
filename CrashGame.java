@@ -1,165 +1,118 @@
 import java.util.Random;
 import java.util.Scanner;
 public class CrashGame{
-    int Guthaben = 100;
+    Guthaben guthaben1;
+    int Guthaben;
     int Geld;
     boolean weiter;
     int Einsatz;
-    public CrashGame(){
+    int Verdopplungen;
+    Scanner scanner;
 
+    public CrashGame(){
+        guthaben1 = new Guthaben();
+        scanner = new Scanner(System.in);
     }
 
     public void startGame(){
-        System.out.println("Wieviel möchten Sie setzen?");
-        Scanner abfr = new Scanner(System.in);
-        int Einsatz = abfr.nextInt();
-
-        if(Einsatz > Guthaben){
-
-            System.out.println("Sie haben einen ungültigen Wert eingegeben, versuchen Sie erneut");
-            startGame();
-        }
-        else if(Einsatz <= Guthaben){
-            Guthaben -= Einsatz;
-
-            System.out.println("Möchten Sie verdoppeln?");
-            System.out.println("1. Ja");
-            System.out.println("2: Nein");
-
-            Scanner abfra = new Scanner(System.in);
-            int abfrage = abfra.nextInt();
-
-            Random random = new Random();
-            boolean erfolg = random.nextBoolean();
-
-            if(abfrage == 1 && erfolg){
-                Geld = 2*Einsatz;
-                System.out.println("Glückwunsch Sie haben Ihren Einsatz verdoppelt! Es sind nun "+Geld+" € im Spiel");
-
-                verdoppeln();
-
-                if(abfrage == 1 && erfolg){
-                    Geld = 2*Einsatz;
-                    System.out.println("Glückwunsch Sie haben Ihren Einsatz verdoppelt! Es sind nun "+Geld+" € im Spiel");
-                    verdoppeln();
-
-                    if(abfrage == 1 && !erfolg){
-
-                        System.out.println("Leider verloren - "+Geld+" €");
-                        weiter();
-
-                    }
-                    else if(abfrage >= 2){
-                        Guthaben += Geld;
-                        weiter();
-                    }
-
-                }
-                else if(abfrage == 1 && !erfolg){
-
-                    System.out.println("Leider verloren - "+Einsatz+" €");
-                    weiter();
-
-                }
-                else if(abfrage >= 2){
-                    Guthaben += Einsatz;
-                    weiter();
-                }
-
-            }
-        }}
-
-    private void weiter(){
-        System.out.println("Noch einmal spielen?");
-        System.out.println("1: Ja");
-        System.out.println("2: Nein");
-
-        Scanner abfr = new Scanner(System.in);
-        int abfrage = abfr.nextInt();
-
-        if(abfrage >= 2){
-            Verdopplungen = 10;
-            weiter = false;
-        }
-        if(abfrage == 1){
-            startGameNeu();
-
-        }
-    }
-
-    private void verdoppeln(){
-        System.out.println("Möchten Sie verdoppeln?");
-        System.out.println("1. Ja");
-        System.out.println("2: Nein");
-
-        Scanner abfr = new Scanner(System.in);
-        int abfrage = abfr.nextInt();
-
-        Random random = new Random();
-        boolean erfolg = random.nextBoolean();
-
-        Geld = Einsatz;
-
-        if(abfrage == 1 && erfolg){
-            Geld = 2* Einsatz;
-            System.out.println("Glückwunsch Sie haben Ihren Einsatz verdoppelt! Es sind nun "+Geld+" € im Spiel");
-            Verdopplungen += 1;
-            verdoppeln();
-
-        }
-
-        else if(abfrage == 1 && !erfolg){
-
-            System.out.println("Leider verloren - "+Geld+" €");
-            Verdopplungen = 0;
-            weiter();
-
-        }
-        else if(abfrage >= 2){
-            Guthaben += Geld;
-            Verdopplungen = 0;
-            weiter = false;
-            weiter();
-        }
-
-    }
-
-    int Verdopplungen;
-    public void startGameNeu(){
+        Guthaben = guthaben1.getGuthaben();
         weiter = true;
         Verdopplungen = 0;
-        while(Verdopplungen <= 5 && weiter){
-
+        while (weiter && Verdopplungen < 5 && Guthaben > 0) {
             einsatzAbfr();
-
-        }}
+        }
+        System.out.println("Spiel beendet. Ihr Guthaben: " + Guthaben + " €");
+        guthaben1.setGuthaben(Guthaben);
+    }
 
     private void einsatzAbfr() {
-
         boolean gültigeEingabe = false;
         while (!gültigeEingabe) {
             System.out.println("Wieviel möchten Sie setzen?");
-            Scanner abfr = new Scanner(System.in);
-            Einsatz = abfr.nextInt();
-            try {
-                if (Einsatz > Guthaben) {
+            if (scanner.hasNextInt()) {
+                Einsatz = scanner.nextInt();
+                if (Einsatz > Guthaben || Einsatz <= 0) {
                     System.out.println("Ungültige Eingabe, versuchen Sie erneut.");
                 } else {
                     gültigeEingabe = true;
-                    Guthaben -= Einsatz;
-                    System.out.println("Einsatz: " + Einsatz + " €");
-                    verdoppeln();
                 }
-            } 
-            catch (Exception e) {
+            } else {
                 System.out.println("Bitte geben Sie eine Zahl ein.");
-                abfr.next(); // Scanner-Fehler zurücksetzen
+                scanner.next(); // ungültige Eingabe verwerfen
             }
         }
-
         Guthaben -= Einsatz;
-        System.out.println("Einsatz: " + Einsatz + " €");
+        guthaben1.setGuthaben(Guthaben);
+        Geld = Einsatz;
         verdoppeln();
+    }
+
+    private void verdoppeln() {
+        boolean weiterVerdoppeln = true;
+        while (weiterVerdoppeln && Verdopplungen < 5) {
+            System.out.println("Möchten Sie verdoppeln?");
+            System.out.println("1. Ja");
+            System.out.println("2. Nein");
+            int abfrage = -1;
+            if (scanner.hasNextInt()) {
+                abfrage = scanner.nextInt();
+            } else {
+                System.out.println("Bitte geben Sie eine Zahl ein.");
+                scanner.next();
+                continue;
+            }
+            if (abfrage == 1) {
+                Random random = new Random();
+                boolean erfolg = random.nextBoolean();
+                if (erfolg) {
+                    Geld *= 2;
+                    Verdopplungen++;
+                    System.out.println("Glückwunsch! Sie haben verdoppelt. Es sind nun " + Geld + " € im Spiel (Verdopplungen: " + Verdopplungen + ")");
+                } else {
+                    System.out.println("Leider verloren - " + Geld + " €");
+                    Geld = 0;
+                    weiterVerdoppeln = false;
+                }
+            } else if (abfrage == 2) {
+                Guthaben += Geld;
+                guthaben1.setGuthaben(Guthaben);
+                System.out.println("Sie nehmen " + Geld + " € mit. Ihr Guthaben: " + Guthaben + " €");
+                weiterVerdoppeln = false;
+            } else {
+                System.out.println("Ungültige Eingabe, bitte 1 oder 2 wählen.");
+            }
+        }
+        if (Verdopplungen >= 5) {
+            Guthaben += Geld;
+            guthaben1.setGuthaben(Guthaben);
+            System.out.println("Maximale Verdopplungen erreicht! Sie nehmen " + Geld + " € mit. Ihr Guthaben: " + Guthaben + " €");
+        }
+        nochmalSpielenFragen();
+    }
+
+    private void nochmalSpielenFragen() {
+        System.out.println("Noch einmal spielen?");
+        System.out.println("1: Ja");
+        System.out.println("2: Nein");
+        int abfrage = -1;
+        boolean gültigeEingabe = false;
+        while (!gültigeEingabe) {
+            if (scanner.hasNextInt()) {
+                abfrage = scanner.nextInt();
+                if (abfrage == 1) {
+                    weiter = true;
+                    gültigeEingabe = true;
+                } else if (abfrage == 2) {
+                    weiter = false;
+                    gültigeEingabe = true;
+                } else {
+                    System.out.println("Bitte 1 oder 2 eingeben.");
+                }
+            } else {
+                System.out.println("Bitte geben Sie eine Zahl ein.");
+                scanner.next();
+            }
+        }
     }
 }
 

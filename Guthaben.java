@@ -1,6 +1,6 @@
 public class Guthaben
 {
-    int guthabenCas = 100;
+    int guthabenCas = 1000;
     public Guthaben()
     {
        

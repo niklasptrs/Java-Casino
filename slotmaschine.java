@@ -3,24 +3,25 @@ import java.util.concurrent.ThreadLocalRandom;
 public class slotmaschine{
 
     int speed = 30;
-    int guthaben = 100;
+    Guthaben guthaben1;
 
     String[] Symbole = {"0", "&", "€", "§", "$", "#", "7"};
 
-    public  slotmaschine(){
-
+    public slotmaschine(Guthaben guthaben1) {
+        this.guthaben1 = guthaben1;
     }
+
     public void startGame(){
         System.out.println("Wieviel möchten Sie setzen?");
         Scanner eins = new Scanner(System.in);
         int einsatz = eins.nextInt();
 
-        if(einsatz > guthaben){
+        if(einsatz > guthaben1.getGuthaben()){
             System.out.println("Ungültige Eingabe, versuchen Sie erneut.");
             startGame();
 
         }
-        else if(einsatz <= guthaben){
+        else if(einsatz <= guthaben1.getGuthaben()){
 
             int slot1 = ThreadLocalRandom.current().nextInt(1, 6 + 1);
             int slot2 = ThreadLocalRandom.current().nextInt(1, 6 + 1);
@@ -52,16 +53,14 @@ public class slotmaschine{
                 System.out.println("");
                 schreiben("-"+einsatz+" €");
                 System.out.println("");
-                guthaben -= einsatz;
+                guthaben1.setGuthaben(guthaben1.getGuthaben() - einsatz);
                 weiter();
             }
 
             if (slot1 == slot2 && slot2 == slot3 && slot3 == slot4 && slot4 == slot5) {
                 System.out.println("");
                 schreiben("Jackpot! +" + einsatz * 15 + " €");
-
-                guthaben += einsatz * 15;
-
+                guthaben1.setGuthaben(guthaben1.getGuthaben() + einsatz * 15);
                 weiter();
             }
             //Wenn 345 richtig ist
@@ -70,11 +69,8 @@ public class slotmaschine{
                 schreiben("WIN!!!");
                 System.out.println("");
                 schreiben("+ "+einsatz * 10+" €");
-
-                guthaben += einsatz * 10;
-
+                guthaben1.setGuthaben(guthaben1.getGuthaben() + einsatz * 10);
                 weiter();
-
             }
 
             //Wenn die 234 richtig ist
@@ -83,9 +79,7 @@ public class slotmaschine{
                 schreiben("WIN!!!");
                 System.out.println("");
                 schreiben("+ "+einsatz * 10+" €");
-
-                guthaben += einsatz * 10;
-
+                guthaben1.setGuthaben(guthaben1.getGuthaben() + einsatz * 10);
                 weiter();
             }
 
@@ -95,9 +89,7 @@ public class slotmaschine{
                 schreiben("WIN!!!");
                 System.out.println("");
                 schreiben("+ "+einsatz * 10+" €");
-
-                guthaben += einsatz * 10;
-
+                guthaben1.setGuthaben(guthaben1.getGuthaben() + einsatz * 10);
                 weiter();
             }
             

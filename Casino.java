@@ -8,11 +8,11 @@ public class Casino{
     Guthaben guthaben1;
 
     public Casino(){
-        roulette1 = new roulette();
-        dice1 = new dice();
-        slotmaschine1 = new slotmaschine();
-        crash1 = new CrashGame();
         guthaben1 = new Guthaben();
+        roulette1 = new roulette(guthaben1);
+        dice1 = new dice(guthaben1);
+        slotmaschine1 = new slotmaschine(guthaben1);
+        crash1 = new CrashGame();
         
         boolean valid = false;
         while(!valid){
@@ -47,7 +47,7 @@ public class Casino{
                 valid = false;
             }
             else if(abfrage == 4){
-                crash1.startGameNeu();
+                crash1.startGame();
                 valid = false;
             }
             else if(abfrage == 5){
@@ -61,6 +61,11 @@ public class Casino{
 
             }
             else if(abfrage == 6){
+                System.out.println("Sie haben sich entschieden das Casino zu verlassen.");
+                System.out.println("Ihr Guthaben: " + guthaben1.getGuthaben() + " €");
+                System.out.println("Vielen Dank für Ihren Besuch!");
+                System.exit(0);
+                
                 valid = true;
             }
         }

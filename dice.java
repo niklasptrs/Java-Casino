@@ -4,13 +4,13 @@ import java.util.Random;
 public class dice {
 
     Scanner scanner = new Scanner(System.in);
-    int guthaben = 100;
+    Guthaben guthaben1;
     int betnum;
     int betwert;
     int dice;
 
-    public dice(){
-        
+    public dice(Guthaben guthaben1){
+        this.guthaben1 = guthaben1;
     }
 
     public void startGame(){
@@ -33,7 +33,7 @@ public class dice {
             startGame();
         }
 
-        if(betwert <=guthaben){
+        if(betwert <=guthaben1.getGuthaben()){
 
             int dice = ThreadLocalRandom.current().nextInt(1, 6 + 1);
 
@@ -43,17 +43,17 @@ public class dice {
 
                 System.out.println("Du erhältst: "+gewinn+" €");
                 System.out.println("»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»");
-                guthaben += gewinn;
+                guthaben1.setGuthaben(guthaben1.getGuthaben() + gewinn);
             }
 
             else if(dice != betnum){
                 System.out.println("Leider nicht richtig, es war "+dice+" .");
                 System.out.println("»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»");
-                guthaben -= betwert;
+                guthaben1.setGuthaben(guthaben1.getGuthaben() - betwert);
             }
 
         }
-        else if(betwert > guthaben || betwert < 1){
+        else if(betwert > guthaben1.getGuthaben() || betwert < 1){
 
             System.out.println("Sie haben nicht genug Guthaben, oder einen ungültigen Wert eingegeben.");
             startGame();
