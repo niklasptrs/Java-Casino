@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import BlackJack.*;
 public class Casino{
 
     roulette roulette1;
@@ -6,7 +7,7 @@ public class Casino{
     slotmaschine slotmaschine1;
     CrashGame crash1;
     Guthaben guthaben1;
-
+    Blackjack bj1;
     public Casino(){
         guthaben1 = new Guthaben();
         roulette1 = new roulette(guthaben1);
@@ -23,8 +24,8 @@ public class Casino{
             System.out.println("2: Roulette");
             System.out.println("3: Slotmaschine");
             System.out.println("4: Crash Game");
-            System.out.println("5: Fragen");
-            System.out.println("6: Spiel verlassen");
+            System.out.println("6: Fragen");
+            System.out.println("7: Spiel verlassen");
 
             Scanner abfr = new Scanner(System.in);
             int abfrage = abfr.nextInt();
@@ -51,6 +52,10 @@ public class Casino{
                 valid = false;
             }
             else if(abfrage == 5){
+                bj1.main({ });
+                valid = false;
+            }
+            else if(abfrage == 6){
                 System.out.println("1: Dice - Setze auf eine Augenzahl und lass dich Überraschen ob du richtig liegst. Durch einen Gewinn verdoppelst du deinen Einsatz.");
                 System.out.println("2: Roulette - Setze auf eine Zahl von 0 bis 36 oder auf schwarz oder rot, das Rad entscheidet. Bei der richtigen Farbe wird dein Einsatz verdoppelt.");
                 System.out.println("Wenn du auf die richtige Zahl gesetzt hast gewinnst du das Sechsunddreißigfache deines Einsatzes.");
@@ -60,7 +65,7 @@ public class Casino{
                 valid = false;
 
             }
-            else if(abfrage == 6){
+            else if(abfrage == 7){
                 System.out.println("Sie haben sich entschieden das Casino zu verlassen.");
                 System.out.println("Ihr Guthaben: " + guthaben1.getGuthaben() + " €");
                 System.out.println("Vielen Dank für Ihren Besuch!");
